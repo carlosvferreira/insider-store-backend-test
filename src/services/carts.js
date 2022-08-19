@@ -43,6 +43,7 @@ async function createCart(codigo_produto, quantidade) {
     const { codigo, imagem, valor, nome } = await Products.findOne({
       codigo: codigo_produto,
     });
+
     const newCart = await Carts.create({
       produtos: {
         codigo,

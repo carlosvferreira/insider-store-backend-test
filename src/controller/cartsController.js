@@ -1,5 +1,5 @@
 const Carts = require("../database/schemas/Carts");
-const Products = require("../database/schemas/Products");
+
 const {
   findCart,
   createCart,
@@ -9,6 +9,13 @@ const {
 
 async function findCartController(req, res, next) {
   const { token } = req.params;
+  if (!token) {
+    res
+      .status(400)
+      .send(
+        "A token must be sent as a parameter. Please verify your request and try again."
+      );
+  }
   try {
     const cart = await findCart(token);
     return res.send(cart);
@@ -20,6 +27,14 @@ async function findCartController(req, res, next) {
 async function postCartsController(req, res, next) {
   const { codigo, quantidade } = req.body;
   const { token } = req.params;
+
+  if (!codigo || isNaN(parseInt(quantidade))) {
+    res
+      .status(400)
+      .send(
+        "A code and an amount must be sent as parameters. Please verify your request and try again."
+      );
+  }
 
   try {
     if (quantidade < 1) {
@@ -46,7 +61,9 @@ async function deleteProductFromCartController(req, res, next) {
   if (!token || !code) {
     return res
       .status(400)
-      .send("Invalid parameters. Please verify your request and try again.");
+      .send(
+        "A token and a code must be sent as parameters. Please verify your request and try again."
+      );
   }
   try {
     const removeItem = await deleteProductFromCart(token, code);

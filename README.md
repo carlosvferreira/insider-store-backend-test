@@ -24,7 +24,7 @@ Baixe e instale o Docker Desktop
 
 https://www.docker.com/products/docker-desktop/
 
-Inicialize um Container com o MondoDB localmente
+Inicialize um Container para rodar o MondoDB localmente
 
 ```bash
 docker run --name insider-store-backend-test -d -p 27017:27017 mongo:latest

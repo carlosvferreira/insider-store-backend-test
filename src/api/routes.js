@@ -1,4 +1,4 @@
-const app = require("express");
+const express = require("express");
 const { errorHandler } = require("./middlewares/errorHandler");
 const {
   findCartController,
@@ -10,7 +10,10 @@ const {
   postProductsController,
 } = require("../controller/productsController");
 
-const routes = app.Router();
+const routes = express.Router();
+
+routes.use(express.json());
+routes.use(express.urlencoded({ extended: true }));
 
 routes.get("/", (req, res) => {
   res.send({
@@ -19,14 +22,13 @@ routes.get("/", (req, res) => {
   });
 });
 
+//Product endpoints
 routes.get("/products", getProductsController);
-
 routes.post("/products", postProductsController);
 
+//Cart endpoints
 routes.get("/cart/:token", findCartController);
-
 routes.post("/cart/:token?", postCartsController);
-
 routes.delete("/cart/:token/:code", deleteProductFromCartController);
 
 routes.use(errorHandler);

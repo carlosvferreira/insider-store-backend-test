@@ -4,7 +4,11 @@
   "description": "Insider Store Backend Test",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node ./src/server.js --unhandled-rejections=strict --trace-warnings",
+    "test": "jest --coverage --forceExit --maxWorkers=1"
+  },
+  "jest": {
+    "testEnvironment": "node"
   },
   "author": "Carlos Eduardo da Veiga Ferreira",
   "license": "ISC",

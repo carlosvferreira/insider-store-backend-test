@@ -15,10 +15,10 @@ async function postProductsController(req, res, next) {
   try {
     const productExists = await Products.findOne({ codigo });
 
-    if (!!productExists) {
+    if (productExists !== null) {
       return res.status(400).send({
         error: "Oops",
-        message: "User already exists",
+        message: "Product already exists",
       });
     }
 

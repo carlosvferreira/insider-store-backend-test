@@ -1,4 +1,4 @@
-exports.products = [
+module.exports.products = [
   {
     codigo: "minimal-top",
     imagem:
