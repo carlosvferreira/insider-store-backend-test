@@ -1,13 +1,11 @@
-const Carts = require("../database/schemas/Carts");
-
 const {
-  findCart,
+  getCart,
   createCart,
   updateCart,
   deleteProductFromCart,
 } = require("../services/carts");
 
-async function findCartController(req, res, next) {
+async function getCartController(req, res, next) {
   const { token } = req.params;
   if (!token) {
     res
@@ -17,7 +15,7 @@ async function findCartController(req, res, next) {
       );
   }
   try {
-    const cart = await findCart(token);
+    const cart = await getCart(token);
     return res.send(cart);
   } catch (err) {
     next(err);
@@ -41,7 +39,7 @@ async function postCartsController(req, res, next) {
       throw new Error("At least one item must be added.");
     }
 
-    const cartExists = await Carts.findOne({ token });
+    const cartExists = await getCart(token);
 
     if (!!cartExists) {
       const addProduct = await updateCart(token, codigo, quantidade);
@@ -75,6 +73,6 @@ async function deleteProductFromCartController(req, res, next) {
 
 module.exports = {
   postCartsController,
-  findCartController,
+  getCartController,
   deleteProductFromCartController,
 };

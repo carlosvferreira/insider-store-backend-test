@@ -1,7 +1,7 @@
 const Carts = require("../database/schemas/Carts");
 const Products = require("../database/schemas/Products");
 
-async function findCart(token) {
+async function getCart(token) {
   try {
     const cart = await Carts.findOne({ token: token });
     if (!cart) {
@@ -222,7 +222,7 @@ async function deleteProductFromCart(token, codigo) {
 }
 
 module.exports = {
-  findCart,
+  getCart,
   createCart,
   updateCart,
   deleteProductFromCart,

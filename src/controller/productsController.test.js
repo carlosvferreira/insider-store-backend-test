@@ -52,7 +52,7 @@ describe("test productsController with different success and failure scenarios",
     expect(response.body?.length).toBe(4);
   });
 
-  it("should return 200 and expected products on body response", async () => {
+  it("should return 400 and expected error message", async () => {
     const spy = jest.spyOn(Products, "find").mockImplementationOnce(() => {
       throw new Error();
     });
@@ -61,10 +61,13 @@ describe("test productsController with different success and failure scenarios",
       .set("Content-Type", "application/json")
       .set("Accept", "application/json");
 
-    expect(response.status).toBe(500);
-    expect(response.body).toBeDefined();
+    expect(response.status).toBe(400);
     expect(response.text).toBe(
-      "Unknown error. Please try again later or contact our support team."
+      JSON.stringify({
+        error: "Oops",
+        message:
+          "Failed to return products. Please try again later or contact our support team.",
+      })
     );
 
     spy.mockRestore();
@@ -94,7 +97,7 @@ describe("test productsController with different success and failure scenarios",
     expect(response.text).toBe(
       JSON.stringify({
         error: "Oops",
-        message: "Product already exists",
+        message: "This product already exists",
       })
     );
   });

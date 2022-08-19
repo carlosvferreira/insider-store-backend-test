@@ -1,7 +1,7 @@
 const express = require("express");
 const { errorHandler } = require("./middlewares/errorHandler");
 const {
-  findCartController,
+  getCartController,
   postCartsController,
   deleteProductFromCartController,
 } = require("../controller/cartsController");
@@ -27,7 +27,7 @@ routes.get("/products", getProductsController);
 routes.post("/products", postProductsController);
 
 //Cart endpoints
-routes.get("/cart/:token", findCartController);
+routes.get("/cart/:token", getCartController);
 routes.post("/cart/:token?", postCartsController);
 routes.delete("/cart/:token/:code", deleteProductFromCartController);
 
