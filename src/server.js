@@ -12,7 +12,7 @@ setupFreshDb();
 
 const app = express();
 
-const server = app.listen(process.env.PORT || 0, () => {
+const server = app.listen(process.env.PORT || 3000, () => {
   const { port } = server.address();
   console.log(`Server running on port ${port}`);
 });
