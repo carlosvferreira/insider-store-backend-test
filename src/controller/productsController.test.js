@@ -6,9 +6,10 @@ const app = require("express")();
 const routes = require("../api/routes");
 const Products = require("../database/schemas/Products");
 
-app.use(routes);
+const databaseConnectionString =
+  process.env.DATABASE_URI_DEV || "mongodb://localhost/insider-store";
 
-const databaseName = "insider-store";
+app.use(routes);
 
 const productsCodes = [
   "minimal-top",
@@ -27,8 +28,7 @@ const productExample = {
 
 describe("test productsController with different success and failure scenarios", () => {
   beforeAll(async () => {
-    const url = `mongodb://localhost/${databaseName}`;
-    await mongoose.connect(url);
+    await mongoose.connect(databaseConnectionString);
     await setupFreshDb(products);
   });
   afterAll(async () => {

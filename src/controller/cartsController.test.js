@@ -6,9 +6,10 @@ const app = require("express")();
 const routes = require("../api/routes");
 const Carts = require("../database/schemas/Carts");
 
-app.use(routes);
+const databaseConnectionString =
+  process.env.DATABASE_URI_DEV || "mongodb://localhost/insider-store";
 
-const databaseName = "insider-store";
+app.use(routes);
 
 const goodPostCartBody = {
   codigo: "minimal-top",
@@ -32,8 +33,7 @@ const badStructurePostCartBody = {
 
 describe("test cartController with different success and failure scenarios", () => {
   beforeAll(async () => {
-    const url = `mongodb://localhost/${databaseName}`;
-    await mongoose.connect(url);
+    await mongoose.connect(databaseConnectionString);
     await setupFreshDb(products);
   });
   afterAll(async () => {
