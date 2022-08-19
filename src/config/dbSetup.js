@@ -1,7 +1,8 @@
 const mongoose = require("mongoose");
 const Products = require("../database/schemas/Products");
+const { products } = require("../mocks/products");
 
-async function setupFreshDb(products) {
+async function setupFreshDb() {
   const collections = Object.keys(mongoose.connection.collections);
   for (const c of collections) {
     const collection = mongoose.connection.collections[c];
