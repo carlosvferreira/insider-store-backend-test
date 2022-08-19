@@ -1,5 +1,7 @@
 # API de produtos e carrinho - Teste para Backend na Insider Store
 
+Publicado em: https://insider-store-backend-test-production.up.railway.app/
+
 ## Rodando localmente
 
 Clone o projeto
